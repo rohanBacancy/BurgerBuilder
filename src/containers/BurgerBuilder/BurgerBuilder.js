@@ -1,9 +1,11 @@
+import axios from 'axios';
 import React,{useState} from 'react';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BurgerControls/BuildControls';
 import Model from '../../components/Model/Model';
+import Checkout from '../Checkout/Checkout';
 
-const BurgerBuilder = () => {
+const BurgerBuilder = ( {history} ) => {
 
     const [ingredients,setIngredients] = useState(
         {
@@ -16,6 +18,8 @@ const BurgerBuilder = () => {
     const [totalPrice,setTotalPrice] = useState(20);
     const [purchasable,setPurchasable] = useState(false);
     const [modelShow,setModelShow] = useState(false);
+    const [loading,setLoading] = useState(false);
+    const [orderErr,setOrderErr] = useState("");
 
 
     const calcPrice = (tempIngs) =>
@@ -71,11 +75,39 @@ const BurgerBuilder = () => {
         calcPrice(tempIngs);
     }
 
+    const continueClickHandler = () => 
+    {
+        // setLoading(true);
+        // const orderObj = {
+        //     customer:{name:"Rohan",address:"Rajmandir flats",pincode:"382330"},
+        //     ingredients,
+        //     price:totalPrice,
+        //     deliveryMethod:"Fastest"
+        // };
+        // axios.post(" https://react-burger-project-rhn-default-rtdb.firebaseio.com/orders.json",orderObj)
+        // .then(response => { console.log(response); setLoading(false); setModelShow(false)} )
+        // .catch(err => {console.log(err.message); setOrderErr(err.message); setLoading(false); });
+        
+        const queryParams = [];
+        for(let i in ingredients)
+        {
+            queryParams.push( encodeURIComponent(i) + "=" + encodeURIComponent(ingredients[i]));
+        }
+        queryParams.push(encodeURIComponent("totalPrice") + "=" + encodeURIComponent(totalPrice));
+        let dt = queryParams.join("&");
+        history.push(
+            {
+                pathname:'/checkout',
+                search: "?" + dt
+            }
+        );
+    }
+
     return (
         <>
             <Burger ingredients={ingredients}/>
             <BuildControls addIngredientHandler={addIngredientHandler} removeIngredientHandler={removeIngredientHandler} totalPrice={totalPrice} purchasable={purchasable} setModelShow={setModelShow}/>   
-            <Model ingredients={ingredients}  totalPrice={totalPrice} modelShow={modelShow} setModelShow={setModelShow} />
+            <Model ingredients={ingredients}  totalPrice={totalPrice} modelShow={modelShow} setModelShow={setModelShow} continueClickHandler={continueClickHandler} loading={loading} orderErr={orderErr} setOrderErr={setOrderErr}/>
         </>
     );
 }

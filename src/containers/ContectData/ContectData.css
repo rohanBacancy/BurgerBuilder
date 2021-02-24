@@ -1,0 +1,50 @@
+.mainfrm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5px;
+}
+
+.mainfrm > input {
+  margin: 5px;
+  width: 60%;
+}
+
+.mainfrm > select {
+  margin: 5px;
+  width: 61%;
+}
+
+.frmContain {
+  width: 50%;
+  margin: auto;
+  margin-top: 25px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 3px grey;
+  border: 1px solid grey;
+  margin-bottom: 10px;
+}
+
+.frmsubmit {
+  border-radius: 25%;
+  background-color: chartreuse;
+  font-weight: bolder;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  width: 100px;
+  height: 35px;
+}
+
+.frmheading {
+  font-weight: bolder;
+  color: darkviolet;
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.invld {
+  border: 1px solid red;
+  background: rgb(235, 187, 187);
+}
