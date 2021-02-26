@@ -1,7 +1,7 @@
 import React from 'react'
 import "./BuildControl.css";
 
-const BuildControl = ({ label,type ,addIngredientHandler,removeIngredientHandler,onSetPurchasable }) => {
+const BuildControl = ({ label,type ,addIngredientHandler,removeIngredientHandler }) => {
 
     let tmpPrice;
     if(label === "Salad")
@@ -16,8 +16,8 @@ const BuildControl = ({ label,type ,addIngredientHandler,removeIngredientHandler
     return (
         <div className="BuildControl">
             <div className="Label">{label + "(" +tmpPrice+")"}</div>
-            <button className="Less" onClick={() => {removeIngredientHandler({type}); onSetPurchasable()}}>Less</button>
-            <button className="More" onClick={() => {addIngredientHandler({type}); onSetPurchasable()}}>More</button>
+            <button className="Less" onClick={() => removeIngredientHandler({type})}>Less</button>
+            <button className="More" onClick={() => addIngredientHandler({type})}>More</button>
         </div>
     )
 }

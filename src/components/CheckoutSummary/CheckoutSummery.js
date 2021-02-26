@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Burger from '../Burger/Burger';
 import './CheckoutSummery.css';
 
-const CheckoutSummery = ({ingredients,totalPrice,history}) => {
+const CheckoutSummery = ({ingredients,history,totalPrice}) => {
 
 
     const onContinueClickHandler = () => {

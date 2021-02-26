@@ -7,7 +7,6 @@ const Orders = () => {
     const [dataReceived,setDataReceived] = useState([]);
     let tempArr = [];
     useEffect( () => {
-        console.log("here");
         axios.get("https://react-burger-project-rhn-default-rtdb.firebaseio.com/orders.json")
         .then(  
                     res => {

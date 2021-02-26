@@ -4,19 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {createStore} from 'redux';
-import reducer from '../src/store/reducer';
-import {Provider} from 'react-redux';
-
-const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
     <Router>
     <App />
     </Router>
-    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

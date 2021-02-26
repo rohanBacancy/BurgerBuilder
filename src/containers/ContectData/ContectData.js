@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './ContectData.css';
 import axios from 'axios';
-import { connect } from 'react-redux';
 
-const ContectData = (props) => {
+const ContectData = ( {ingredients,totalPrice,history} ) => {
 
     const [udata,setUdata] = useState(
         {
@@ -14,12 +13,37 @@ const ContectData = (props) => {
             delivery:'cheap'
         }
     );
+    // const [validity,setVality] = useState({nameCls:'invld',emailCls:'invld',streetCls:'invld',postalCls:'invld'})
     const [loading,setLoading] = useState(false);
     const [orderErr,setOrderErr] = useState("");
     const [orderComplete,setOrderComplete] = useState(false);
     let frmIs;
     
-    
+    // const validityChecker = () => 
+    // {
+    //     if(udata.name.length>=5)
+    //     {
+    //         setVality({...validity,nameCls:''});
+    //     }
+    //     else{console.log("name else");
+    //         setVality({...validity,nameCls:'invld'});}
+    //     if(udata.email.length>=1)
+    //     {
+    //         setVality({...validity,emailCls:''});
+    //     }
+    //     else{console.log("email else");setVality({...validity,emailCls:'invld'});}
+    //     if(udata.postalCode.length === 5)
+    //     {
+    //         console.log(udata.postalCode.length)
+    //        setVality({...validity,postalCls:''});
+    //     }
+    //     else{console.log("posytal else");setVality({...validity,postalCls:'invld'});}
+    //     if(udata.street.length>1)
+    //     {
+    //         setVality({...validity,streetCls:''});
+    //     }
+    //     else{console.log("street else");setVality({...validity,streetCls:'invld'});}
+    // }
     const handleSubmit = (e) => 
     {
         e.preventDefault();
@@ -28,8 +52,8 @@ const ContectData = (props) => {
          setLoading(true);
          const orderObj = {
              userinfo:udata,
-             ingredients:props.ings,
-             price:props.tprice,
+             ingredients:ingredients,
+             price:totalPrice,
              deliveryMethod:udata.delivery
          };
          console.log(orderObj);
@@ -49,14 +73,15 @@ const ContectData = (props) => {
             frmIs = (<div className="frmContain">
                 <div>{orderErr}</div>
                 </div>)
-                setTimeout(() => {props.history.push("/")},3000)
+                console.log(history);
+                setTimeout(() => {history.push("/")},3000)
         }
         else if(orderComplete)
         {
             frmIs = (<div className="frmContain">
                 <h3>Order Completed</h3>
                 </div>)
-            setTimeout(() => {props.history.push("/")},3000)
+            setTimeout(() => {history.push("/")},3000)
         }
         else
         {
@@ -81,13 +106,4 @@ const ContectData = (props) => {
     )
 }
 
-const mapStateToProps = (state) =>
-{
-    return{
-        ings:state.ingredients,
-        tprice:state.totalPrice,
-    }
-}
-
-
-export default connect(mapStateToProps)(ContectData);
+export default ContectData
