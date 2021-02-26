@@ -9,11 +9,11 @@ const controls = [
     {label:"Meat" , type:"meat"},
 ];
 
-const BuildControls = ({addIngredientHandler,removeIngredientHandler,totalPrice,purchasable,setModelShow}) => {
+const BuildControls = ({addIngredientHandler,removeIngredientHandler,totalPrice,purchasable,setModelShow,onSetPurchasable}) => {
     return (
         <div className="BuildControls">
             <p style={{marginTop:'1px'}}><strong>Current Price : {totalPrice} Rs</strong></p>
-            {controls.map( (ctrl) => <BuildControl key={ctrl.label} label={ctrl.label} type={ctrl.type} addIngredientHandler={addIngredientHandler} removeIngredientHandler={removeIngredientHandler}/>)}
+            {controls.map( (ctrl) => <BuildControl key={ctrl.label} label={ctrl.label} type={ctrl.type} addIngredientHandler={addIngredientHandler} removeIngredientHandler={removeIngredientHandler} onSetPurchasable={onSetPurchasable}/>)}
             {purchasable ? <button className="OrderButton" onClick={() => {setModelShow(true)}}> ORDER NOW </button> : null}
         </div>
     )
